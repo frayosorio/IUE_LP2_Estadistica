@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 
@@ -29,6 +32,31 @@ public class FrmEstadistica extends JFrame {
         JButton btnQuitar=new JButton("Quitar");
         btnQuitar.setBounds(80,70,100,25);
         getContentPane().add(btnQuitar);
+
+        JList lstMuestra=new JList();
+        lstMuestra.setBounds(210, 40, 100, 150);
+        getContentPane().add(lstMuestra);
+
+        //eventos de la GUI
+        btnAgregar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                agregarDato();
+            }
+        });
+
+        btnQuitar.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                quitarDato();
+            }
+        });
+    }
+
+
+    private void agregarDato(){
+
+    }
+
+    private void quitarDato(){
 
     }
 
