@@ -37,22 +37,22 @@ public class FrmEstadistica extends JFrame {
         getContentPane().add(btnQuitar);
 
         lstMuestra = new JList();
-        JScrollPane spMuestra=new JScrollPane(lstMuestra);
+        JScrollPane spMuestra = new JScrollPane(lstMuestra);
         spMuestra.setBounds(210, 40, 100, 150);
         getContentPane().add(spMuestra);
 
-        JButton btnEstadistica=new JButton("Calcular");
+        JButton btnEstadistica = new JButton("Calcular");
         btnEstadistica.setBounds(10, 200, 100, 25);
         getContentPane().add(btnEstadistica);
 
-        JComboBox cmbEstadistica=new JComboBox();
-        String[] opciones=new String[]{"Sumatoria", "Promedio", "Desviación", "Máximo", "Minimo", "Moda"};
-        DefaultComboBoxModel mdlEstadistica=new DefaultComboBoxModel(opciones);
+        JComboBox cmbEstadistica = new JComboBox();
+        String[] opciones = new String[] { "Sumatoria", "Promedio", "Desviación", "Máximo", "Minimo", "Moda" };
+        DefaultComboBoxModel mdlEstadistica = new DefaultComboBoxModel(opciones);
         cmbEstadistica.setModel(mdlEstadistica);
-        cmbEstadistica.setBounds(110,200,100,25);
+        cmbEstadistica.setBounds(110, 200, 100, 25);
         getContentPane().add(cmbEstadistica);
 
-        txtEstadistica= new JTextField();
+        txtEstadistica = new JTextField();
         txtEstadistica.setBounds(210, 200, 100, 25);
         getContentPane().add(txtEstadistica);
 
@@ -75,10 +75,16 @@ public class FrmEstadistica extends JFrame {
     private int totalDatos = -1;
 
     private void agregarDato() {
-        double dato = Double.parseDouble(txtDato.getText());
-        totalDatos++;
-        muestra[totalDatos] = dato;
-        mostrarMuestra();
+        try {
+            double dato = Double.parseDouble(txtDato.getText());
+            totalDatos++;
+            muestra[totalDatos] = dato;
+            txtDato.setText("");
+            mostrarMuestra();
+        } catch (Exception ex) {
+            txtDato.setText("");
+            JOptionPane.showMessageDialog(null, "Debe especificar un valor numérico");
+        }
     }
 
     private void mostrarMuestra() {
@@ -90,7 +96,18 @@ public class FrmEstadistica extends JFrame {
     }
 
     private void quitarDato() {
-        JOptionPane.showMessageDialog(null, "Hizo clic en QUITAR");
+        // obtener la posicion escogida
+        int posicion = lstMuestra.getSelectedIndex();
+        if (posicion >= 0) {
+            // retirar la posicion del vector
+            for (int i = posicion; i < totalDatos; i++) {
+                muestra[i] = muestra[i + 1];
+            }
+            totalDatos--;
+            mostrarMuestra();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una posición");
+        }
     }
 
 }
