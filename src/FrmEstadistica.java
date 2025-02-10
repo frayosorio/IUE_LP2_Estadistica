@@ -7,10 +7,11 @@ public class FrmEstadistica extends JFrame {
 
     JTextField txtDato;
     JList lstMuestra;
+    JTextField txtEstadistica;
 
     public FrmEstadistica() {
 
-        setSize(600, 300);
+        setSize(400, 300);
         setTitle("Estadística");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -36,8 +37,24 @@ public class FrmEstadistica extends JFrame {
         getContentPane().add(btnQuitar);
 
         lstMuestra = new JList();
-        lstMuestra.setBounds(210, 40, 100, 150);
-        getContentPane().add(lstMuestra);
+        JScrollPane spMuestra=new JScrollPane(lstMuestra);
+        spMuestra.setBounds(210, 40, 100, 150);
+        getContentPane().add(spMuestra);
+
+        JButton btnEstadistica=new JButton("Calcular");
+        btnEstadistica.setBounds(10, 200, 100, 25);
+        getContentPane().add(btnEstadistica);
+
+        JComboBox cmbEstadistica=new JComboBox();
+        String[] opciones=new String[]{"Sumatoria", "Promedio", "Desviación", "Máximo", "Minimo", "Moda"};
+        DefaultComboBoxModel mdlEstadistica=new DefaultComboBoxModel(opciones);
+        cmbEstadistica.setModel(mdlEstadistica);
+        cmbEstadistica.setBounds(110,200,100,25);
+        getContentPane().add(cmbEstadistica);
+
+        txtEstadistica= new JTextField();
+        txtEstadistica.setBounds(210, 200, 100, 25);
+        getContentPane().add(txtEstadistica);
 
         // eventos de la GUI
         btnAgregar.addActionListener(new ActionListener() {
